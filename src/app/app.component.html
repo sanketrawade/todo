@@ -1,0 +1,36 @@
+<mat-toolbar [color]="color">
+  <mat-icon>home</mat-icon>
+  Todo App
+</mat-toolbar>
+ <mat-card>
+    <form #postFormGroup="ngForm" (ngSubmit)="Save(postFormGroup)">
+      <mat-form-field>
+        <input matInput required [(ngModel)]="title" minlength="5"
+          placeholder="Please enter title." type="text" name="title" id="">
+        <mat-error>Please enter title.</mat-error>
+      </mat-form-field>
+      <br><br>
+      <button [disabled]="!postFormGroup.valid" mat-raised-button type="submit"
+      [color]="color">save</button>
+    </form>
+  <mat-expansion-panel *ngFor="let task of taskList" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+      <div [ngClass]="{ 'isCompleted' : task?.IsCompleted != true }">
+        {{ task.Title }}
+      </div>
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-action-row > 
+      <button mat-raised-button (click)="DeleteTask(task._id)" [color]="color">Delete</button>
+      <button mat-raised-button (click)="ChangeStatus(task)" *ngIf="task?.IsCompleted == true" [color]="color">Incomplete</button>
+      <button mat-raised-button (click)="ChangeStatus(task)" *ngIf="task?.IsCompleted == false" [color]="color">complete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <div class="alert alert-danger" *ngIf="taskList?.length==0">No Task found.</div>
+  <div *ngIf="isLoading" class="loading-indicator">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+</mat-card>

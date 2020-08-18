@@ -1,0 +1,26 @@
+.isCompleted{
+    text-decoration-line: line-through;
+}
+
+form{
+    display:flex;
+}
+
+mat-card{
+    width: 600px;
+    height: auto;
+    margin-left: 300px;
+    margin-top: 20px;
+}
+
+mat-expansion-panel{
+    margin-top: 10px;
+}
+
+
+
+button{
+    margin-left: 20px;
+    height: 45px;
+}
+
