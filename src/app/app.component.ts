@@ -12,11 +12,12 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = '';
   taskList: Task[] = [];
-  color = 'warn';
+  color = 'primary';
   taskSubscription: Subscription;
   status = null;
   columnsToDisplay = ['userName', 'age'];
   isLoading = false;
+  isSubmitted = false;
   constructor(private taskService: TaskService) {
   }
 
@@ -29,11 +30,26 @@ export class AppComponent implements OnInit {
     this.isLoading = true;
     this.taskSubscription = this.taskService.GetTaskList().subscribe((response: any) => {
       this.taskList = response.data;
+      this.AllTaskCompleted();
       this.isLoading = false;
     });
   }
 
+  AllTaskCompleted(){
+    let flag = false;
+    this.taskList.forEach(task => {
+      if(task.IsCompleted === false){
+        this.color = 'warn';
+        flag = true;
+      }
+    });
+    if (!flag){
+      this.color = 'primary';
+    }
+  }
+
   Save(postFormGroup: NgForm) {
+    this.isSubmitted = true;
     if (postFormGroup.invalid) {
       return;
     }
@@ -42,6 +58,7 @@ export class AppComponent implements OnInit {
       Title: postFormGroup.value.title,
       IsCompleted: false
     };
+    this.isSubmitted = false;
     postFormGroup.resetForm();
     this.AddTask(task);
   }
