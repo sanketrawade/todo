@@ -2,8 +2,8 @@
 <mat-card>
   <form #postFormGroup="ngForm" (ngSubmit)="Save(postFormGroup)">
     <mat-form-field>
-      <input matInput required ngModel minlength="5" placeholder="Please enter title." type="text" name="title" id="">
-      <mat-error>Please enter title.</mat-error>
+      <input matInput required ngModel minlength="5" placeholder="Please enter task." type="text" name="title" id="">
+      <mat-error>Please enter task.</mat-error>
     </mat-form-field>
     <br><br>
     <button [disabled]="!postFormGroup.valid && isSubmitted" mat-raised-button type="submit"

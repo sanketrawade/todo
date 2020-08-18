@@ -15,9 +15,19 @@ mat-card{
 
 mat-expansion-panel{
     margin-top: 10px;
+    animation-name: taskanimat;
+    animation-duration: 5s;
+    transition: 10s;
 }
 
-
+@keyframes taskanimat{
+from{
+    transform: translateX(-300px)
+}
+to{
+    transform: translateX(0px);
+}
+}
 
 button{
     margin-left: 20px;
